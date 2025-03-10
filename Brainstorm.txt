@@ -1,0 +1,17 @@
+25% - performance - does it work
+
+sales marketing plan - gotta mention it
+product features, customer engagement
+proof of concept
+
+25% - innovation - new approaches, creative ways to overcome issues
+
+25% - azure services 
+
+25% - responsible AI reliability privacy safety
+
+well it would just be like a gpt wrapper
+with inputs for costs and such
+and will generate 3 predictions: optimistic, neutral, pessimistic
+with probabilities for each
+and maybe reference case studies of similar transformations
