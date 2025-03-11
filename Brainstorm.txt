@@ -11,7 +11,27 @@ proof of concept
 25% - responsible AI reliability privacy safety
 
 well it would just be like a gpt wrapper
-with inputs for costs and such
+
+inputs:
+project budget
+project duration
+employees needed
+
+outputs:
+employee satisfaction
+risks of failure
+savings
+ROI
+
+predictive analysis/forecasting revenue
+
+generates a chart to visualize the data
+interactive graph 
+
 and will generate 3 predictions: optimistic, neutral, pessimistic
 with probabilities for each
 and maybe reference case studies of similar transformations
+
+six thinking hats
+
+conversational mode maybe
