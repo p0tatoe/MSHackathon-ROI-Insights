@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solomon Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        
+        .header {
+            padding: 16px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #7256ff;
+            margin-right: 10px;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background-color: #7256ff;
+            color: white;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .input-container {
+            padding: 16px;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            outline: none;
+            resize: none;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+        
+        .send-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #7256ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .send-button:disabled {
+            background-color: #d0d0d0;
+            cursor: not-allowed;
+        }
+        
+        .thinking-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 10px;
+            align-self: flex-start;
+        }
+        
+        .thinking-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #7256ff;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: pulse 1.4s infinite ease-in-out;
+        }
+        
+        .thinking-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .thinking-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-logo"></div>
+        <h1 class="header-title">Solomon</h1>
+    </div>
+    
+    <div class="chat-container" id="chatContainer">
+        <div class="message bot-message">Greetings! I'm Solomon, your AI partner for business transformation. How can I help?</div>
+    </div>
+    
+    <div class="input-container">
+        <textarea 
+            class="message-input" 
+            id="messageInput" 
+            placeholder="Message Solomon..." 
+            rows="1"
+            autofocus
+        ></textarea>
+        <button class="send-button" id="sendButton" disabled>
+            &#10148;
+        </button>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chatContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        
+        // Track if the AI is "thinking"
+        let isThinking = false;
+        
+        // Adjust textarea height as user types
+        messageInput.addEventListener('input', function() {
+            // Enable/disable send button based on input
+            sendButton.disabled = messageInput.value.trim() === '';
+            
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight > 120 ? 120 : this.scrollHeight) + 'px';
+        });
+        
+        // Handle sending messages
+        function sendMessage() {
+            if (messageInput.value.trim() === '' || isThinking) return;
+            
+            const userMessage = messageInput.value.trim();
+            
+            // Add user message to chat
+            appendMessage(userMessage, 'user');
+            
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            sendButton.disabled = true;
+            
+            // Show thinking indicator
+            showThinkingIndicator();
+            
+            // Process message and get response
+            // This is where you would integrate with an actual AI API
+            processMessage(userMessage);
+        }
+        
+        // Send message on button click
+        sendButton.addEventListener('click', sendMessage);
+        
+        // Send message on Enter key (but allow Shift+Enter for new lines)
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // Add a message to the chat
+        function appendMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            
+            if (sender === 'user') {
+                messageDiv.classList.add('user-message');
+            } else {
+                messageDiv.classList.add('bot-message');
+            }
+            
+            messageDiv.textContent = text;
+            chatContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // Show the thinking indicator
+        function showThinkingIndicator() {
+            isThinking = true;
+            
+            const indicator = document.createElement('div');
+            indicator.classList.add('thinking-indicator');
+            indicator.id = 'thinkingIndicator';
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('thinking-dot');
+                indicator.appendChild(dot);
+            }
+            
+            chatContainer.appendChild(indicator);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // Hide the thinking indicator
+        function hideThinkingIndicator() {
+            const indicator = document.getElementById('thinkingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+            isThinking = false;
+        }
+        
+        // Process the message and generate a response
+        function processMessage(userMessage) {
+            // This is where you would call your AI API
+            // For now, we'll just simulate a delay and return a hardcoded response
+            
+            setTimeout(() => {
+                // Hide thinking indicator
+                hideThinkingIndicator();
+                
+                // For demo purposes, just echo back a simple response
+                // This is where AI-generated content would go
+                const response = getDemoResponse(userMessage);
+                appendMessage(response, 'bot');
+            }, 1500); // Simulate thinking time
+        }
+        
+        // Demo response function - replace with actual AI integration
+        function getDemoResponse(userMessage) {
+            // This is a placeholder for the actual AI logic
+            // Here you would:
+            // 1. Send the user message to your backend or directly to an AI API
+            // 2. Process the response
+            // 3. Return the formatted response
+            
+            const lowercaseMessage = userMessage.toLowerCase();
+            
+            if (lowercaseMessage.includes('hello') || lowercaseMessage.includes('hi')) {
+                return "Hello! Nice to meet you. How can I help you today?";
+            } else if (lowercaseMessage.includes('help')) {
+                return "I'm here to help. What do you need assistance with?";
+            } else if (lowercaseMessage.includes('thank')) {
+                return "You're welcome! Is there anything else I can help with?";
+            } else if (lowercaseMessage.includes('bye')) {
+                return "Goodbye! Feel free to return if you have more questions.";
+            } else {
+                return "I understand you're saying: '" + userMessage + "'. In a full implementation, I would process this with an AI model and provide a helpful response.";
+            }
+        }
+        
+        // Focus input on page load
+        window.onload = function() {
+            messageInput.focus();
+        };
+    </script>
+</body>
+</html>
