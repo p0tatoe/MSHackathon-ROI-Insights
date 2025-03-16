@@ -35,9 +35,7 @@
 
 .header-logo {
   width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #7256ff;
+  background-image: url(/favicon-32x32.png);
   margin-right: 10px;
 }
 
