@@ -1,0 +1,144 @@
+/* Analyze.module.css */
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sideMenu {
+    width: 250px;
+    background-color: #f5f5f5;
+    padding: 16px;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .fileList {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .fileItem {
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+  
+  .fileItemActive {
+    background-color: #e6f3ff;
+    color: #0066cc;
+  }
+  
+  .fileItem:hover:not(.fileItemActive) {
+    background-color: #eeeeee;
+  }
+  
+  .addFileSection {
+    margin-top: 16px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .primaryButton {
+    background-color: #0066cc;
+    color: white;
+  }
+  
+  .secondaryButton {
+    background-color: #cccccc;
+  }
+  
+  .fullWidthButton {
+    width: 100%;
+  }
+  
+  .contentArea {
+    flex-grow: 1;
+    padding: 24px;
+    overflow: auto;
+  }
+  
+  .contentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .contentTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .diagramContainer {
+    background-color: white;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .diagramPreview {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+    overflow: auto;
+  }
+  
+  .codeEditor {
+    width: 100%;
+    height: 250px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+  
+  .codeViewer {
+    width: 100%;
+    height: 250px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.875rem;
+    background-color: #f9f9f9;
+    overflow: auto;
+    white-space: pre;
+  }
+  
+  .saveButton {
+    background-color: #00994d;
+  }

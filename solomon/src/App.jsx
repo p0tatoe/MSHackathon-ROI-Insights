@@ -2,8 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Chat from './components/Chat.jsx';
 import ROI from './components/ROI';
-import SWOT from './components/SWOT';
+import Analyze from './components/Analyze.jsx';
 import Dashboard from './components/Dashboard.jsx';
+import Planning from './components/Planning.jsx';
 
 function App() {
   const [currentView, setCurrentView] = useState('chat');
@@ -11,13 +12,15 @@ function App() {
   const renderView = () => {
     switch (currentView) {
       case 'chat':
-        return <Chat />;
+        return <Chat/>;
       case 'roi':
-        return <ROI />;
-      case 'swot':
-        return <SWOT />;
+        return <ROI/>;
+      case 'analyze':
+        return <Analyze/>;
       case 'dashboard':
         return <Dashboard/>;
+      case 'planning':
+        return <Planning/>;
       default:
         return <Chat />;
     }
@@ -47,16 +50,22 @@ function App() {
               ROI Calculator
             </button>
             <button 
-              className={currentView === 'swot' ? 'active' : ''} 
-              onClick={() => setCurrentView('swot')}
+              className={currentView === 'analyze' ? 'active' : ''} 
+              onClick={() => setCurrentView('analyze')}
             >
-              SWOT
+              Analyze
             </button>
             <button 
               className={currentView === 'dashboard' ? 'active' : ''} 
               onClick={() => setCurrentView('dashboard')}
             >
-              Dashboard
+              Research
+            </button>
+            <button 
+              className={currentView === 'planning' ? 'active' : ''} 
+              onClick={() => setCurrentView('planning')}
+            >
+              Planning
             </button>
           </div>
         </nav>
@@ -65,8 +74,6 @@ function App() {
         </div>
 
       </div>
-
-
 
       <main className="content">
         {renderView()}

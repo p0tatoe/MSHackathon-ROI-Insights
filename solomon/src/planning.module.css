@@ -1,0 +1,125 @@
+/* Planning.module.css */
+.boardContainer {
+    padding: 1rem;
+  }
+  
+  .boardTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .columnContainer {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .column {
+    flex-shrink: 0;
+    width: 16rem;
+    background-color: #f3f4f6;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+  }
+  
+  .columnHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .columnTitle {
+    font-weight: bold;
+    font-size: 1.125rem;
+  }
+  
+  .addButton {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .addButton:hover {
+    background-color: #2563eb;
+  }
+  
+  .taskContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .task {
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: move;
+  }
+  
+  .task.dragging {
+    opacity: 0.5;
+  }
+  
+  .taskActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+  }
+  
+  .editInput {
+    width: 100%;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .editButton {
+    background-color: #3b82f6;
+  }
+  
+  .editButton:hover {
+    background-color: #2563eb;
+  }
+  
+  .deleteButton {
+    background-color: #ef4444;
+  }
+  
+  .deleteButton:hover {
+    background-color: #dc2626;
+  }
+  
+  .saveButton {
+    background-color: #22c55e;
+  }
+  
+  .saveButton:hover {
+    background-color: #16a34a;
+  }
+  
+  .cancelButton {
+    background-color: #6b7280;
+  }
+  
+  .cancelButton:hover {
+    background-color: #4b5563;
+  }
+  
