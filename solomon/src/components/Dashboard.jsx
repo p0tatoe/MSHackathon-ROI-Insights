@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import styles from '../dashboard.module.css';
 
 function Dashboard() {
   const [similarCases, setSimilarCases] = useState([]);
   const [relevantNews, setRelevantNews] = useState([]);
-
+  const [isLoadingCases, setIsLoadingCases] = useState(true);
+  const [isLoadingNews, setIsLoadingNews] = useState(true);
+  
   useEffect(() => {
     // Simulate fetching similar cases and relevant news from an AI API.
-    // Replace this with your actual API calls.
     const fetchAIResults = async () => {
       try {
         // Simulate API call for similar cases
+        setIsLoadingCases(true);
         const casesResponse = await simulateAIAPI('similarCases');
         setSimilarCases(casesResponse);
-
+        setIsLoadingCases(false);
+        
         // Simulate API call for relevant news
+        setIsLoadingNews(true);
         const newsResponse = await simulateAIAPI('relevantNews');
         setRelevantNews(newsResponse);
+        setIsLoadingNews(false);
       } catch (error) {
         console.error('Error fetching AI results:', error);
+        setIsLoadingCases(false);
+        setIsLoadingNews(false);
         // Handle error (e.g., display an error message)
       }
     };
-
+    
     fetchAIResults();
   }, []);
-
+  
   // Simulate an AI API call (replace with your actual API integration)
   const simulateAIAPI = async (type) => {
     return new Promise((resolve) => {
@@ -45,38 +53,42 @@ function Dashboard() {
       }, 500); // Simulate network latency
     });
   };
-
+  
   return (
-    <div className="dashboard-view">
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1, padding: '10px', borderRight: '1px solid #ccc' }}>
-          <h2>Similar Cases</h2>
-          {similarCases.length > 0 ? (
-            <ul>
+    <div className={styles.dashboardView}>
+      <div className={styles.dashboardContainer}>
+        <div className={styles.dashboardSection}>
+          <h2 className={styles.sectionTitle}>Similar Cases</h2>
+          {isLoadingCases ? (
+            <p className={styles.loadingMessage}>Loading similar cases...</p>
+          ) : similarCases.length > 0 ? (
+            <ul className={styles.itemList}>
               {similarCases.map((caseItem) => (
-                <li key={caseItem.id}>
-                  <h3>{caseItem.title}</h3>
-                  <p>{caseItem.summary}</p>
+                <li key={caseItem.id} className={styles.listItem}>
+                  <h3 className={styles.itemTitle}>{caseItem.title}</h3>
+                  <p className={styles.itemContent}>{caseItem.summary}</p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>Loading similar cases...</p>
+            <p className={styles.loadingMessage}>No similar cases found</p>
           )}
         </div>
-        <div style={{ flex: 1, padding: '10px' }}>
-          <h2>Relevant News</h2>
-          {relevantNews.length > 0 ? (
-            <ul>
+        <div className={styles.dashboardSection}>
+          <h2 className={styles.sectionTitle}>Relevant News</h2>
+          {isLoadingNews ? (
+            <p className={styles.loadingMessage}>Loading relevant news...</p>
+          ) : relevantNews.length > 0 ? (
+            <ul className={styles.itemList}>
               {relevantNews.map((newsItem) => (
-                <li key={newsItem.id}>
-                  <h3>{newsItem.title}</h3>
-                  <p>{newsItem.description}</p>
+                <li key={newsItem.id} className={styles.listItem}>
+                  <h3 className={styles.itemTitle}>{newsItem.title}</h3>
+                  <p className={styles.itemContent}>{newsItem.description}</p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>Loading relevant news...</p>
+            <p className={styles.loadingMessage}>No relevant news found</p>
           )}
         </div>
       </div>

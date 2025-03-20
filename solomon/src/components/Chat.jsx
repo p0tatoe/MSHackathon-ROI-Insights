@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import style from '../chat.module.css'; // Assuming you have your styles here
-import logo from '/android-chrome-512x512.png'; // Import your logo
+import style from '../chat.module.css';
+import logo from '/android-chrome-512x512.png';
+
 
 function Chat() {
+
+  const webhookUrl = "https://solomonai.app.n8n.cloud/webhook/afd2f97f-1e18-4328-a33f-e79b82176710";
+
   // State to store the chat messages
-  const [messages, setMessages] = useState([
-  ]);
+  const [messages, setMessages] = useState([]);
 
   // State for the current input message
   const [inputMessage, setInputMessage] = useState('');
+  
+  // State to track when the bot is typing
+  const [isLoading, setIsLoading] = useState(false);
 
   // Reference for the message container to auto-scroll to bottom
   const messageContainerRef = useRef(null);
@@ -20,7 +26,7 @@ function Chat() {
   const [showGreeting, setShowGreeting] = useState(true);
 
   // Function to handle sending messages
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim() === '') return;
 
     // Add user message to the chat
@@ -32,12 +38,49 @@ function Chat() {
 
     // Hide the greeting after the first user message
     setShowGreeting(false);
+    
+    // Set loading state to true
+    setIsLoading(true);
 
-    // Simulate a bot response after a small delay
-    setTimeout(() => {
-      const botResponse = getBotResponse(inputMessage);
-      setMessages([...newMessages, { text: botResponse, sender: 'bot' }]);
-    }, 1000);
+    try {
+      // Send message to webhook
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: inputMessage,
+          // You can include additional metadata if needed
+          timestamp: new Date().toISOString(),
+          sessionId: localStorage.getItem('chatSessionId') || createSessionId(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Parse the response from the webhook
+      const data = await response.json();
+      
+      // Add bot response to the chat
+      setMessages([...newMessages, { text: data.reply || data.message || "Sorry, I couldn't process that request.", sender: 'bot' }]);
+    } catch (error) {
+      console.error('Error sending message to webhook:', error);
+      // Add error message to the chat
+      setMessages([...newMessages, { text: "Sorry, there was an error connecting to the service. Please try again later.", sender: 'bot' }]);
+    } finally {
+      // Set loading state back to false
+      setIsLoading(false);
+    }
+  };
+
+  // Create a unique session ID for this chat
+  const createSessionId = () => {
+    const sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('chatSessionId', sessionId);
+    return sessionId;
   };
 
   // Function to handle input change
@@ -64,27 +107,44 @@ function Chat() {
     }
   };
 
-  // Simple bot response logic - this can be expanded or connected to an actual API
-  const getBotResponse = (userMessage) => {
-    const lowerCaseMessage = userMessage.toLowerCase();
-
-    if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
-      return "Hello! How can I assist with your business today?";
-    } else if (lowerCaseMessage.includes('business') && lowerCaseMessage.includes('transformation')) {
-      return "Business transformation involves reimagining and redesigning core business processes. I can help you identify opportunities, develop strategies, and implement solutions. What specific aspect are you interested in?";
-    } else if (lowerCaseMessage.includes('thank')) {
-      return "You're welcome! Is there anything else you'd like to discuss?";
-    } else {
-      return "That's an interesting point. Could you elaborate more on what you're looking to achieve?";
-    }
-  };
-
   // Auto-scroll to the latest message when messages change
   useEffect(() => {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isLoading]);
+
+  // Initialize session ID if not exists
+  useEffect(() => {
+    if (!localStorage.getItem('chatSessionId')) {
+      createSessionId();
+    }
+    
+    // Optional: Load chat history from the server
+    const loadChatHistory = async () => {
+      try {
+        const response = await fetch(`${webhookUrl}/history?sessionId=${localStorage.getItem('chatSessionId')}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.messages && data.messages.length > 0) {
+            setMessages(data.messages);
+            setShowGreeting(false);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading chat history:', error);
+      }
+    };
+    
+    // Uncomment the line below if you want to load chat history when the component mounts
+    // loadChatHistory();
+  }, [webhookUrl]);
 
   return (
     <div>
@@ -94,7 +154,7 @@ function Chat() {
           <h2>
             Solomon
           </h2>
-          <h3 >
+          <h3>
             Your AI Partner for Business Transformation
           </h3>
         </div>
@@ -111,6 +171,16 @@ function Chat() {
                 {message.text}
               </div>
             ))}
+            
+            {isLoading && (
+              <div className={`${style.message} ${style.botMessage} ${style.loadingMessage}`}>
+                <div className={style.typingIndicator}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -126,8 +196,9 @@ function Chat() {
           onKeyPress={handleKeyPress}
           ref={textareaRef}
           autoFocus
+          disabled={isLoading}
         />
-        {inputMessage.trim() !== '' && (
+        {inputMessage.trim() !== '' && !isLoading && (
           <button
             className={style.sendButton}
             id="sendButton"
