@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "none",
+    "appService.deploySubpath": "solomon/dist"
+}
