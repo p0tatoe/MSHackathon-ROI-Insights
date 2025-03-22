@@ -14,8 +14,6 @@ function Dashboard() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Add any authentication headers if needed
-          // 'Authorization': 'Bearer YOUR_TOKEN',
         },
       });
       
@@ -32,8 +30,8 @@ function Dashboard() {
 
   // API URLs for the webhooks
   const API_ENDPOINTS = {
-    similarCases: 'https://n8n-5qbd6-u37268.vm.elestio.app/webhook-test/similarcases',
-    relevantNews: 'https://n8n-5qbd6-u37268.vm.elestio.app/webhook-test/relevantnews'
+    similarCases: 'https://n8n-5qbd6-u37268.vm.elestio.app/webhook/similarcases',
+    relevantNews: 'https://n8n-5qbd6-u37268.vm.elestio.app/webhook/relevantnews'
   };
 
   // Fetch similar cases when the Generate button is clicked

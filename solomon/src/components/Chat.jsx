@@ -5,7 +5,7 @@ import logo from '/android-chrome-512x512.png';
 
 function Chat() {
 
-  const webhookUrl = "https://n8n-5qbd6-u37268.vm.elestio.app/webhook-test/2e247cb1-f244-41f1-a5ce-65e1c07d24b7"
+  const webhookUrl = "https://n8n-5qbd6-u37268.vm.elestio.app/webhook/2e247cb1-f244-41f1-a5ce-65e1c07d24b7"
 
   // State to store the chat messages
   const [messages, setMessages] = useState([]);
