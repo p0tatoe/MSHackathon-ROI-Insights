@@ -39,11 +39,6 @@ this is for a consulting company?
 
 ·        A link to your code repository on GitHub
 
-- Performance 25%
-- Innovation 25%
-- Breadth of Azure services used 25%
-- Responsible AI 25%
-
 
 predictive insights, 
 actionable recommendations for change initiatives, 
@@ -51,15 +46,9 @@ visualizations and reporting.
 
 
 
-
-
 Drop in any relevant files and I can analyze your business transformation strategy
 
-
-
 Ask me anything
-
-
 
 with 
 
