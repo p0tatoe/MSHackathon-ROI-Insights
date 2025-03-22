@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from '../roi.module.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const ROI = () => {
@@ -147,23 +148,37 @@ const ROI = () => {
     return "N/A";
   };
 
+  // Handle simulate button click
+  const handleSimulate = () => {
+    // Placeholder for simulation functionality
+    alert("Simulation feature will be implemented here");
+  };
+
   return (
-    <div className="p-4 max-w-full overflow-x-auto">
-      <h2 className="text-2xl font-bold text-center mb-6">ROI Calculator</h2>
+    <div className={styles.container}>
+      <div className={styles.headerContainer}>
+        <h2 className={styles.title}>ROI Calculator</h2>
+        <button 
+          onClick={handleSimulate} 
+          className={styles.simulateButton}
+        >
+          Simulate
+        </button>
+      </div>
       
       {/* Spreadsheet-like layout */}
-      <div className="mb-6">
-        <table className="border-collapse min-w-full">
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
           <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2 w-48">Item</th>
+            <tr className={styles.tableHeader}>
+              <th className={`${styles.tableHeaderCell} ${styles.itemNameCell}`}>Item</th>
               {periods.map((period, index) => (
-                <th key={index} className="border p-2 w-24">Period {period}</th>
+                <th key={index} className={styles.tableHeaderCell}>Period {period}</th>
               ))}
-              <th className="border p-2 w-24">
+              <th className={styles.tableHeaderCell}>
                 <button
                   onClick={addPeriod}
-                  className="bg-blue-500 text-white p-1 rounded w-full"
+                  className={styles.addButton}
                 >
                   + Add Period
                 </button>
@@ -173,25 +188,25 @@ const ROI = () => {
           
           <tbody>
             {/* Costs Section */}
-            <tr className="bg-gray-50">
-              <td colSpan={periods.length + 2} className="border p-2 font-bold">
+            <tr className={styles.sectionHeader}>
+              <td colSpan={periods.length + 2} className={styles.sectionHeaderCell}>
                 Costs
               </td>
             </tr>
             
             {costs.map((cost, costIndex) => (
-              <tr key={`cost-${costIndex}`}>
-                <td className="border p-2">
-                  <div className="flex items-center gap-2">
+              <tr key={`cost-${costIndex}`} className={styles.itemRow}>
+                <td className={styles.itemCell}>
+                  <div className={styles.itemInputContainer}>
                     <input
                       type="text"
                       value={cost.name}
                       onChange={(e) => updateCostName(costIndex, e.target.value)}
-                      className="border p-1 w-full"
+                      className={styles.itemInput}
                     />
                     <button
                       onClick={() => removeCost(costIndex)}
-                      className="bg-red-500 text-white p-1 rounded"
+                      className={styles.removeButton}
                     >
                       ✕
                     </button>
@@ -199,69 +214,69 @@ const ROI = () => {
                 </td>
                 
                 {periods.map((_, periodIndex) => (
-                  <td key={periodIndex} className="border p-2">
+                  <td key={periodIndex} className={styles.valueCell}>
                     <input
                       type="number"
                       value={cost.values[periodIndex]}
                       onChange={(e) => updateCostValue(costIndex, periodIndex, e.target.value)}
-                      className="border p-1 w-full"
+                      className={styles.valueInput}
                     />
                   </td>
                 ))}
                 
-                <td className="border"></td>
+                <td className={styles.emptyCell}></td>
               </tr>
             ))}
             
             <tr>
-              <td className="border p-2">
+              <td className={styles.itemCell}>
                 <button
                   onClick={addCostItem}
-                  className="bg-blue-500 text-white p-1 rounded w-full"
+                  className={styles.addButton}
                 >
                   + Add Cost
                 </button>
               </td>
-              <td colSpan={periods.length + 1} className="border"></td>
+              <td colSpan={periods.length + 1} className={styles.emptyCell}></td>
             </tr>
             
             {/* Total Costs Row */}
-            <tr className="bg-gray-100">
-              <td className="border p-2 font-bold">Total Costs</td>
+            <tr className={styles.totalRow}>
+              <td className={styles.totalLabelCell}>Total Costs</td>
               {periods.map((_, periodIndex) => {
                 const totalCost = costs.reduce(
                   (sum, costItem) => sum + (Number(costItem.values[periodIndex]) || 0),
                   0
                 );
                 return (
-                  <td key={periodIndex} className="border p-2 font-bold text-right">
+                  <td key={periodIndex} className={styles.totalValueCell}>
                     ${totalCost.toFixed(2)}
                   </td>
                 );
               })}
-              <td className="border"></td>
+              <td className={styles.emptyCell}></td>
             </tr>
             
             {/* Benefits Section */}
-            <tr className="bg-gray-50">
-              <td colSpan={periods.length + 2} className="border p-2 font-bold">
+            <tr className={styles.sectionHeader}>
+              <td colSpan={periods.length + 2} className={styles.sectionHeaderCell}>
                 Benefits
               </td>
             </tr>
             
             {benefits.map((benefit, benefitIndex) => (
-              <tr key={`benefit-${benefitIndex}`}>
-                <td className="border p-2">
-                  <div className="flex items-center gap-2">
+              <tr key={`benefit-${benefitIndex}`} className={styles.itemRow}>
+                <td className={styles.itemCell}>
+                  <div className={styles.itemInputContainer}>
                     <input
                       type="text"
                       value={benefit.name}
                       onChange={(e) => updateBenefitName(benefitIndex, e.target.value)}
-                      className="border p-1 w-full"
+                      className={styles.itemInput}
                     />
                     <button
                       onClick={() => removeBenefit(benefitIndex)}
-                      className="bg-red-500 text-white p-1 rounded"
+                      className={styles.removeButton}
                     >
                       ✕
                     </button>
@@ -269,75 +284,75 @@ const ROI = () => {
                 </td>
                 
                 {periods.map((_, periodIndex) => (
-                  <td key={periodIndex} className="border p-2">
+                  <td key={periodIndex} className={styles.valueCell}>
                     <input
                       type="number"
                       value={benefit.values[periodIndex]}
                       onChange={(e) => updateBenefitValue(benefitIndex, periodIndex, e.target.value)}
-                      className="border p-1 w-full"
+                      className={styles.valueInput}
                     />
                   </td>
                 ))}
                 
-                <td className="border"></td>
+                <td className={styles.emptyCell}></td>
               </tr>
             ))}
             
             <tr>
-              <td className="border p-2">
+              <td className={styles.itemCell}>
                 <button
                   onClick={addBenefitItem}
-                  className="bg-blue-500 text-white p-1 rounded w-full"
+                  className={styles.addButton}
                 >
                   + Add Benefit
                 </button>
               </td>
-              <td colSpan={periods.length + 1} className="border"></td>
+              <td colSpan={periods.length + 1} className={styles.emptyCell}></td>
             </tr>
             
             {/* Total Benefits Row */}
-            <tr className="bg-gray-100">
-              <td className="border p-2 font-bold">Total Benefits</td>
+            <tr className={styles.totalRow}>
+              <td className={styles.totalLabelCell}>Total Benefits</td>
               {periods.map((_, periodIndex) => {
                 const totalBenefit = benefits.reduce(
                   (sum, benefitItem) => sum + (Number(benefitItem.values[periodIndex]) || 0),
                   0
                 );
                 return (
-                  <td key={periodIndex} className="border p-2 font-bold text-right">
+                  <td key={periodIndex} className={styles.totalValueCell}>
                     ${totalBenefit.toFixed(2)}
                   </td>
                 );
               })}
-              <td className="border"></td>
+              <td className={styles.emptyCell}></td>
             </tr>
             
             {/* ROI Row */}
-            <tr className="bg-blue-50">
-              <td className="border p-2 font-bold">ROI (%)</td>
+            <tr className={styles.roiRow}>
+              <td className={styles.roiLabelCell}>ROI (%)</td>
               {periods.map((_, periodIndex) => (
-                <td key={periodIndex} className="border p-2 font-bold text-right text-blue-600">
+                <td key={periodIndex} className={styles.roiValueCell}>
                   {roiValues[periodIndex]}%
                 </td>
               ))}
-              <td className="border"></td>
+              <td className={styles.emptyCell}></td>
             </tr>
             
             {/* Cumulative ROI Row */}
-            <tr className="bg-blue-100">
-              <td className="border p-2 font-bold">Cumulative ROI</td>
-              <td colSpan={periods.length} className="border p-2 font-bold text-right text-blue-800">
+            <tr className={styles.cumulativeRoiRow}>
+              <td className={styles.cumulativeRoiLabelCell}>Cumulative ROI</td>
+              <td colSpan={periods.length} className={styles.cumulativeRoiValueCell}>
                 {calculateCumulativeROI()}%
               </td>
-              <td className="border"></td>
+              <td className={styles.emptyCell}></td>
             </tr>
           </tbody>
         </table>
       </div>
       
       {/* Chart */}
-      <div className="border p-4 rounded shadow-sm">
-        <h3 className="text-lg font-bold mb-4">ROI Over Time</h3>
+      <div className={styles.chartContainer}>
+        <h3 className={styles.chartTitle}>ROI Over Time</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -345,7 +360,7 @@ const ROI = () => {
             <YAxis label={{ value: "ROI (%)", angle: -90, position: "insideLeft" }} />
             <Tooltip formatter={(value) => [`${value}%`, "ROI"]} />
             <Legend />
-            <Line type="monotone" dataKey="roi" name="ROI %" stroke="#8884d8" />
+            <Line type="monotone" dataKey="roi" name="ROI %" stroke={getComputedStyle(document.documentElement).getPropertyValue('--accent-primary') || "#7A335A"} />
           </LineChart>
         </ResponsiveContainer>
       </div>

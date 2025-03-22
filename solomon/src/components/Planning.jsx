@@ -133,15 +133,34 @@ const AddTaskForm = ({ addTask }) => {
     }
   };
 
+  const handleGenerate = () => {
+    // This function would handle task generation logic
+    // For demonstration, we'll add a placeholder task
+    addTask("Generated task: " + new Date().toLocaleTimeString());
+  };
+
   return (
     <form className={styles.addTaskForm} onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Add a new task..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button type="submit">Add</button>
+      {/* Left side group - Input and Add button */}
+      <div className={styles.leftFormGroup}>
+        <input
+          type="text"
+          placeholder="Add a new task..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className={styles.taskInput}
+        />
+        <button type="submit" className={styles.addButton}>Add</button>
+      </div>
+      
+      {/* Right side - Generate button */}
+      <button 
+        type="button" 
+        onClick={handleGenerate} 
+        className={styles.generateButton}
+      >
+        Generate
+      </button>
     </form>
   );
 };

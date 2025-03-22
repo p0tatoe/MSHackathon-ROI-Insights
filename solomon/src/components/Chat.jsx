@@ -5,7 +5,7 @@ import logo from '/android-chrome-512x512.png';
 
 function Chat() {
 
-  const webhookUrl = "https://solomonai.app.n8n.cloud/webhook/afd2f97f-1e18-4328-a33f-e79b82176710";
+  const webhookUrl = "https://n8n-5qbd6-u37268.vm.elestio.app/webhook-test/2e247cb1-f244-41f1-a5ce-65e1c07d24b7"
 
   // State to store the chat messages
   const [messages, setMessages] = useState([]);
@@ -65,7 +65,7 @@ function Chat() {
       const data = await response.json();
       
       // Add bot response to the chat
-      setMessages([...newMessages, { text: data.reply || data.message || "Sorry, I couldn't process that request.", sender: 'bot' }]);
+      setMessages([...newMessages, { text: data.output || data.message || "Sorry, I couldn't process that request.", sender: 'bot' }]);
     } catch (error) {
       console.error('Error sending message to webhook:', error);
       // Add error message to the chat
@@ -105,6 +105,18 @@ function Chat() {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  // Handler for Upload Files button
+  const handleUploadFiles = () => {
+    // Implement file upload functionality here
+    console.log('Upload Files button clicked');
+  };
+
+  // Handler for Prompt Settings button
+  const handlePromptSettings = () => {
+    // Implement prompt settings functionality here
+    console.log('Prompt Settings button clicked');
   };
 
   // Auto-scroll to the latest message when messages change
@@ -207,6 +219,24 @@ function Chat() {
             &#10148;
           </button>
         )}
+      </div>
+      
+      <div className={style.buttonContainer}>
+        <button 
+          onClick={handleUploadFiles}
+        >
+          Upload Files
+        </button>
+        <button 
+          onClick={handlePromptSettings}
+        >
+          Prompt Settings
+        </button>
+        <button 
+          
+        >
+          Voice Mode
+        </button>
       </div>
     </div>
   );

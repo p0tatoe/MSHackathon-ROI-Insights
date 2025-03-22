@@ -1,0 +1,102 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--background-secondary);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    overflow-x: hidden;
+  }
+  
+  .collapsed {
+    width: 60px;
+  }
+  
+  .sidebarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .sidebarTitle {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: border-color 0.25s, background-color 0.25s;
+  }
+  
+  .toggleButton:hover {
+    background-color: var(--background-primary);
+    border-color: var(--accent-primary);
+  }
+  
+  .toggleButton:focus,
+  .toggleButton:focus-visible {
+    outline: none;
+  }
+  
+  .sidebarNav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  
+  .sidebarList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebarItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: var(--text-primary);
+  }
+  
+  .sidebarItem:hover {
+    background-color: var(--background-primary);
+  }
+  
+  .sidebarIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: var(--text-secondary);
+  }
+  
+  .sidebarLabel {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .sidebarFooter {
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+  }

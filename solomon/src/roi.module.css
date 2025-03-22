@@ -1,0 +1,203 @@
+/* roi.module.css */
+
+.container {
+    padding: 1rem;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  .tableContainer {
+    margin-bottom: 1.5rem;
+  }
+  
+  .table {
+    border-collapse: collapse;
+    min-width: 100%;
+  }
+  
+  .tableHeader {
+    background-color: var(--background-secondary);
+  }
+  
+  .tableHeaderCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    width: 6rem;
+  }
+  
+  .itemNameCell {
+    width: 12rem;
+  }
+  
+  .sectionHeader {
+    background-color: var(--background-secondary);
+  }
+  
+  .sectionHeaderCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .itemRow {
+    /* Row styling */
+  }
+  
+  .itemCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+  }
+  
+  .itemInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .itemInput {
+    border: 1px solid var(--border-color);
+    padding: 0.25rem;
+    width: 100%;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+  }
+  
+  .valueCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+  }
+  
+  .valueInput {
+    border: 1px solid var(--border-color);
+    padding: 0.25rem;
+    width: 100%;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+  }
+  
+  .emptyCell {
+    border: 1px solid var(--border-color);
+  }
+  
+  .addButton {
+    background-color: var(--accent-primary);
+    color: white;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .addButton:hover {
+    background-color: var(--accent-hover);
+  }
+  
+  .removeButton {
+    background-color: #D34479;
+    color: white;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .removeButton:hover {
+    background-color: #b71c1c;
+  }
+  
+  .totalRow {
+    background-color: var(--background-secondary);
+  }
+  
+  .totalLabelCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .totalValueCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+    text-align: right;
+  }
+  
+  .roiRow {
+    background-color: rgba(122, 51, 90, 0.1);
+  }
+  
+  .roiLabelCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .roiValueCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+    text-align: right;
+    color: var(--accent-primary);
+  }
+  
+  .cumulativeRoiRow {
+    background-color: rgba(122, 51, 90, 0.2);
+  }
+  
+  .cumulativeRoiLabelCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .cumulativeRoiValueCell {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    font-weight: bold;
+    text-align: right;
+    color: var(--accent-secondary);
+  }
+  
+  .chartContainer {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .chartTitle {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .simulateButton {
+    background-color: var(--accent-primary, #7A335A);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .simulateButton:hover {
+    background-color: var(--accent-primary-dark, #5e2745);
+  }

@@ -5,9 +5,22 @@ import ROI from './components/ROI';
 import Analyze from './components/Analyze.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Planning from './components/Planning.jsx';
+import Sidebar from './components/Sidebar'; // Import your Sidebar component
 
 function App() {
   const [currentView, setCurrentView] = useState('chat');
+  
+  const navItems = [
+    { icon: '📂', label: 'Projects' },
+    { icon: '⬇️', label: 'Import Project' },
+    { icon: '⬆️', label: 'Export Project' },
+    { icon: '📩', label: 'Share' },
+    { icon: '👤', label: 'Account' },
+    { icon: '💵', label: 'Solomon Bucks' },
+    { icon: '⚙️', label: 'Settings' },
+    { icon: '🔧', label: 'Help' },
+    // ... more navigation items
+  ];
 
   const renderView = () => {
     switch (currentView) {
@@ -25,59 +38,61 @@ function App() {
         return <Chat />;
     }
   };
-
+  
   return (
     <div className="app-container">
       <div class="header">
-
-        <div class="header-left"> 
+        <div class="header-left">
           <div class="header-logo"></div>
           <div class="header-title">Solomon</div>
         </div>
-
+        
         <nav className="navbar">
           <div className="nav-buttons">
-            <button 
-              className={currentView === 'chat' ? 'active' : ''} 
+            <button
+              style={{borderTopLeftRadius: '8px',
+                borderBottomLeftRadius: '8px',}}
+              className={currentView === 'chat' ? 'active' : ''}
               onClick={() => setCurrentView('chat')}
             >
               Chat
             </button>
-            <button 
-              className={currentView === 'roi' ? 'active' : ''} 
+            <button
+              className={currentView === 'roi' ? 'active' : ''}
               onClick={() => setCurrentView('roi')}
             >
               ROI Calculator
             </button>
-            <button 
-              className={currentView === 'analyze' ? 'active' : ''} 
+            <button
+              className={currentView === 'analyze' ? 'active' : ''}
               onClick={() => setCurrentView('analyze')}
             >
-              Analyze
+              Diagrams
             </button>
-            <button 
-              className={currentView === 'dashboard' ? 'active' : ''} 
+            <button
+              className={currentView === 'dashboard' ? 'active' : ''}
               onClick={() => setCurrentView('dashboard')}
             >
               Research
             </button>
-            <button 
-              className={currentView === 'planning' ? 'active' : ''} 
+            <button
+              style={{borderTopRightRadius: '8px',
+              borderBottomRightRadius: '8px',}}
+              className={currentView === 'planning' ? 'active' : ''}
               onClick={() => setCurrentView('planning')}
             >
               Planning
             </button>
           </div>
         </nav>
-        <div class="header-right">
-      
-        </div>
-
       </div>
-
-      <main className="content">
-        {renderView()}
-      </main>
+      
+      <div className="main-container">
+        <Sidebar items={navItems} setCurrentView={setCurrentView} currentView={currentView} />
+        <main className="content">
+          {renderView()}
+        </main>
+      </div>
     </div>
   );
 }

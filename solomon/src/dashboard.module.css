@@ -1,87 +1,135 @@
 /* dashboard.module.css */
 
 .dashboardView {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #f9fafb;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-  }
-  
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.dashboardContainer {
+  display: flex;
+  min-height: 600px;
+}
+
+.dashboardSection {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+}
+
+.dashboardSection:first-child {
+  border-right: 1px solid var(--border-color);
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-primary);
+  font-weight: 600;
+}
+
+.itemList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  background-color: var(--background-primary);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.listItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.itemTitle {
+  font-size: 1.1rem;
+  color: var(--accent-primary);
+  margin: 0 0 10px 0;
+}
+
+.itemContent {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.loadingMessage {
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.generateButton {
+  padding: 8px 16px;
+  background-color: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.generateButton:hover {
+  background-color: var(--accent-hover);
+}
+
+.generateButton:disabled {
+  background-color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  color: #9c27b0;
+  padding: 16px;
+  background-color: rgba(156, 39, 176, 0.1);
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.itemLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.itemLinkHover {
+  background-color: var(--background-secondary);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   .dashboardContainer {
-    display: flex;
-    min-height: 600px;
-  }
-  
-  .dashboardSection {
-    flex: 1;
-    padding: 20px;
-    position: relative;
+    flex-direction: column;
   }
   
   .dashboardSection:first-child {
-    border-right: 1px solid #e0e0e0;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
   }
-  
-  .sectionTitle {
-    font-size: 1.4rem;
-    color: #333;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #3f51b5;
-    font-weight: 600;
-  }
-  
-  .itemList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .listItem {
-    background-color: white;
-    border-radius: 6px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .listItem:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .itemTitle {
-    font-size: 1.1rem;
-    color: #3f51b5;
-    margin: 0 0 10px 0;
-  }
-  
-  .itemContent {
-    color: #555;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin: 0;
-  }
-  
-  .loadingMessage {
-    color: #666;
-    font-style: italic;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .dashboardContainer {
-      flex-direction: column;
-    }
-    
-    .dashboardSection:first-child {
-      border-right: none;
-      border-bottom: 1px solid #e0e0e0;
-    }
-  }
+}

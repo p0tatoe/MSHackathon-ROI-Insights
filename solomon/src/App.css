@@ -1,3 +1,19 @@
+/* Variables are imported from base CSS - extending here */
+:root {
+  /* Layout Variables */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --border-radius: 8px;
+  
+  /* Additional Colors */
+  --button-active: #7A335A;
+  --button-hover-light: #E0ded6;
+  --border-light: lightgray;
+}
+
+/* Reset Styles */
 * {
   margin: 0;
   padding: 0;
@@ -5,32 +21,30 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Layout Components */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
   justify-content: space-between;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
 }
 
+/* Header Styles */
 .header {
-  padding: 16px;
+  padding: var(--spacing-sm);
   background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   /*box-shadow: 0px 40px 40px brown;*/
-  
 }
 
 .header-left {
   flex-grow: 1;
   display: flex;
-}
-
-.header-right {
-  width: 158px;
-  flex-grow: 1;
 }
 
 .header-logo {
@@ -42,45 +56,89 @@
 .header-title {
   font-size: 18px;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
+/* Navigation Styles */
 .navbar {
-  background-color:transparent;
-  display: flex;
+  background-color: transparent;
 }
 
 .nav-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
 }
 
 .nav-buttons button {
-  background-color: #fbf9f6;
+  background-color: var(--background-primary);
   border-style: solid;
   border-width: 1px;
-  border-color: lightgray;
-  color: #26231a;
-  padding: 0.5rem 1rem;
+  border-color: var(--border-light);
+  color: var(--text-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 1rem;
   transition: background-color 0.3s;
 }
 
 .nav-buttons button:hover {
-  background-color: #E0ded6;
+  background-color: var(--button-hover-light);
 }
 
 .nav-buttons button.active {
-  background-color: #7A335A;
+  background-color: var(--button-active);
   color: white;
+}
+
+/* Main Container Layout */
+.main-container {
+  display: flex;
+  flex: 1;
+  width: 100%;
 }
 
 .content {
   flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
+  padding: var(--spacing-lg);
+  max-width: calc(1200px - 250px); /* Adjust based on your sidebar width */
   margin: 0 auto;
   width: 100%;
+  overflow-y: auto;
+}
+
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+  .nav-buttons button {
+    background-color: var(--background-secondary);
+    border-color: #444;
+  }
+
+  .nav-buttons button:hover {
+    background-color: #2a2a2a;
+  }
+
+  /* Keep button active color consistent */
+  .nav-buttons button.active {
+    background-color: var(--button-active);
+  }
+}
+
+/* Theme-specific styles for manual theme switching */
+.theme-light .nav-buttons button {
+  background-color: var(--background-primary);
+  border-color: var(--border-light);
+}
+
+.theme-light .nav-buttons button:hover {
+  background-color: var(--button-hover-light);
+}
+
+.theme-dark .nav-buttons button {
+  background-color: var(--background-secondary);
+  border-color: #444;
+}
+
+.theme-dark .nav-buttons button:hover {
+  background-color: #2a2a2a;
 }

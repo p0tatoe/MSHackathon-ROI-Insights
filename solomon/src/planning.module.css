@@ -3,38 +3,45 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 1rem;
+  width: 100%;
+  padding: 1.5rem;
   box-sizing: border-box;
+  color: var(--text-primary);
+  max-width: 100%;
 }
 
 /* Title styling */
 .planningTitle {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  font-size: 1.8rem;
 }
 
 /* Board layout */
 .board {
   display: flex;
   justify-content: space-between;
-  height: calc(100% - 120px); /* Account for header and form height */
-  gap: 1rem;
+  height: calc(100% - 130px); /* Increased height */
+  gap: 1.5rem; /* Increased gap between columns */
   overflow: hidden;
+  width: 100%;
 }
 
 /* Column styling */
 .column {
   flex: 1;
-  background-color: #f4f5f7;
+  background-color: var(--background-secondary);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.2rem; /* Increased padding */
   min-width: 0; /* Allows columns to shrink below content size */
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
 }
 
 .columnOver {
-  background-color: #e3e6f0;
+  background-color: rgba(122, 51, 90, 0.1); /* Light version of accent-primary */
 }
 
 .column h2 {
@@ -42,6 +49,7 @@
   margin-bottom: 1rem;
   text-align: center;
   font-size: 1.2rem;
+  color: var(--text-primary);
 }
 
 /* Task list area */
@@ -53,7 +61,7 @@
 
 /* Individual task card */
 .task {
-  background-color: white;
+  background-color: var(--background-primary);
   border-radius: 6px;
   padding: 0.8rem;
   margin-bottom: 0.8rem;
@@ -64,6 +72,7 @@
 
 .taskContent {
   word-break: break-word;
+  color: var(--text-primary);
 }
 
 .task p {
@@ -84,12 +93,12 @@
   cursor: pointer;
   padding: 2px 6px;
   border-radius: 3px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .editButton:hover {
-  background-color: #e3f2fd;
-  color: #0069c0;
+  background-color: rgba(122, 51, 90, 0.1);
+  color: var(--accent-primary);
 }
 
 .deleteButton:hover {
@@ -104,10 +113,12 @@
 .editTaskForm input {
   width: 100%;
   padding: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 0.9rem;
   margin-bottom: 6px;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }
 
 .editTaskButtons {
@@ -124,50 +135,70 @@
 }
 
 .saveButton {
-  background-color: #0052cc;
+  background-color: var(--accent-primary);
   color: white;
   border: none;
 }
 
 .saveButton:hover {
-  background-color: #0042a3;
+  background-color: var(--accent-hover);
 }
 
 .cancelButton {
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .cancelButton:hover {
-  background-color: #e0e0e0;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Add task form */
 .addTaskForm {
   display: flex;
   margin-bottom: 1.5rem;
+  justify-content: space-between; /* Spread content across container */
+}
+
+/* Left side group for input and add button */
+.leftFormGroup {
+  display: flex; /* Keep input and add button together */
 }
 
 .addTaskForm input {
-  flex: 1;
+  width: 300px;
   padding: 0.6rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px 0 0 4px;
   font-size: 1rem;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }
 
-.addTaskForm button {
+.addButton {
   padding: 0.6rem 1.2rem;
-  background-color: #0052cc;
+  background-color: var(--accent-primary);
   color: white;
   border: none;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
   font-size: 1rem;
+  margin-right: 10px; /* Add some space after the add button */
 }
 
-.addTaskForm button:hover {
-  background-color: #0042a3;
+.generateButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.addButton:hover, .generateButton:hover {
+  background-color: var(--accent-hover);
 }
 
 /* Responsive adjustments */
@@ -185,4 +216,61 @@
   .planningContainer {
     height: auto;
   }
+
+/* Add these styles to your planning.module.css file */
+
+.addTaskForm {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between; /* Spread elements */
+}
+
+.leftFormGroup {
+  display: flex;
+  align-items: center;
+}
+
+.taskInput {
+  width: 33%; /* Makes the input take up a third of the container */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px; /* Rounded corners only on the left side */
+  margin-right: 0; /* Remove right margin to attach to the add button */
+}
+
+/* New class for the generate button */
+.generateButton {
+  margin-left: auto; /* This pushes just the generate button to the right */
+}
+
+.addButton {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0; /* Rounded corners only on the right side */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.formButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.formButtons button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.formButtons button:hover {
+  background-color: #45a049;
+}
+
 }
