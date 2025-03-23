@@ -1,7 +1,8 @@
 # Solomon: AI-Powered Transformation Intelligence
 
 ## Overview
-To watch our video: https://drive.google.com/file/d/1Hw8hwA9XzbYqziLym_jULMvgpPkoqU9p/view?usp=sharing
+Watch our PRESENTATION: https://drive.google.com/file/d/1Hw8hwA9XzbYqziLym_jULMvgpPkoqU9p/view?usp=sharing
+Try our DEMO: https://jolly-pebble-08693970f.6.azurestaticapps.net/
 
 Solomon is an intelligent platform designed to revolutionize how organizations approach transformation initiatives. With 70% of change projects failing, our solution leverages AI to give leaders the insights, tools, and confidence they need to be among the successful 30%. 
 
